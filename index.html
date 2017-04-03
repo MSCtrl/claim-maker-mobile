@@ -1,0 +1,431 @@
+<html>
+    <head>
+        <title>Harwood Claim Maker</title>
+
+        <link rel="stylesheet" type="text/css" href="css/normalize.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="css/materialize.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="css/awesomplete.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
+		<link href="css/materialdesignicons.min.css" media="all" rel="stylesheet" type="text/css" />
+		
+		<script src="js/moment.js"></script>
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/materialize.js"></script>
+		<script src="js/awesomplete.js" async></script>
+		<script src="js/jspdf.debug.js"></script>
+		<script src="js/program.js"></script>
+		<script src="js/print.js"></script>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+
+    <body onload="populate()">
+        <!-- Banner -->
+        <div class="banner">
+			<img src="img/logo.jpg" id="imglogo"></img>
+		</div>
+		
+		<!-- Division to centralize all elements in this application -->
+		<div id="maingrid" class="container">
+			<form class="col s12">
+				<div class="row">
+					<div class="input-field col s8">
+						<input id="idclm_name" type="text" value="Mohamad Shahrim"></input>
+						<label for="idclm_name">Name</label>
+					</div>
+					<div class="col s4"></div>
+				</div>
+			
+			
+				<div class="row">
+					<div class="col s8">
+						<label>Designation</label>
+						<select id="idclm_designation" class="browser-default">
+							<option value="Junior Log Inspector">Junior Log Inspector</option>
+							<option value="Log Inspector" selected>Log Inspector</option>
+							<option value="Senior Log Inspector">Senior Log Inspector</option>
+							<option value="Supervisor">Supervisor</option>
+							<option value="Junior Executive">Junior Executive</option>
+						</select>
+					</div>
+					<div class="col s4"></div>
+				</div>
+
+				<div class="row">
+					<div class="col s8">
+						<label>Department</label>
+						<select id="idclm_department" class="browser-default">
+							<option value="Account">Account</option>
+							<option value="Endorsement" selected>Endorsement</option>
+							<option value="MIS">MIS</option>
+						</select>
+					</div>
+					<div class="col s4"></div>
+				</div>
+				
+				<div class="row">
+					<div class="col s8">
+						<label for="idclm_region">Region</label>					
+						<select id="idclm_region" class="browser-default">
+							<option value="Sibu">Sibu</option>
+							<option value="Kapit Sub-Region" selected>Kapit Sub-Region</option>
+							<option value="HQ Kuching">HQ Kuching</option>
+						</select>
+					</div>
+					<div class="col s4"></div>
+				</div>
+
+				<!-- Options of claim type -->
+				<label>Tick where necessary</label>
+				<p><input type="checkbox" name="clm_entertainment" id="cbox-entm"  class="filled-in" value="Entertainment"></input><label for="cbox-entm">Entertainment</label></p>
+				<p><input type="checkbox" name="clm_travelling" id="cbox-trav" class="filled-in" value="Travelling" checked></input><label for="cbox-trav">Travelling</label></p>
+				<p><input type="checkbox" name="clm_miscellaneous" id="cbox-misc" class="filled-in" value="Miscellaneous"></input><label for="cbox-misc">Miscellaneous</label></p>
+
+				<div class="row">
+					<div class="input-field col s8">
+						<input type="text" id="idclm_wo" spellcheck="false"></input>
+						<label>Work Order No: </label>
+					</div>
+					<div class="col s4"></div>
+				</div>
+
+		</form>
+		
+		<form class="col s12">
+
+			<div class="row">
+				<div class="input-field col s6">
+					<label for="idclm_depart">Depart</label>
+				</div>
+				<div class="input-field col s6">
+					<label for="idclm_return">Return</label>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="input-field col s3">
+					<input type="date" id="idclm_depart" onchange="getDays()"></input>
+				</div>
+				<div class="input-field col s3">
+					<input type="time" id="idclm_detime"></input>
+				</div>
+				
+				<div class="input-field col s3">
+					<input type="date" id="idclm_return" onchange="getDays()"></input>
+				</div>
+				<div class="input-field col s3">
+					<input type="time" id="idclm_retime"></input>
+				</div>
+			</div>
+
+		</form>
+
+			<!-- Section of adding claimable items button -->
+			<center>
+			<a id="btnsubs" onClick="newSubs()" class="btn-floating btn-large waves-effect waves-light"><i class="mdi mdi-food"></i></a>
+			<a id="btnlodg" onClick="newLodging()" class="btn-floating btn-large waves-effect waves-light"><i class="mdi mdi-hotel"></i></a>
+			<a id="btnfare" onClick="newFare()" class="btn-floating btn-large waves-effect waves-light"><i class="mdi mdi-car"></i></a>
+			<a id="btnmobi" onClick="newMobile()" class="btn-floating btn-large waves-effect waves-light"><i class="mdi mdi-cellphone-iphone"></i></a>
+			<a id="btnother" onClick="newOther()" class="btn-floating btn-large waves-effect waves-light"><i class="mdi mdi-note-plus"></i></a>
+			</center>
+
+			<div class="divider form-end"></div>
+			
+			<!-- Section of claimable items -->
+			<div>
+				<table class="claimTable highlight bordered">
+					<tr class="claimRow" id="row01">
+						<td class="claimOption"><a class="btn-floating btn waves-effect waves-light red" onclick="deleteRow(0,'row01')">&times;</a></td>
+						<td class="claimDescription" onclick="openModal(0)"></td>
+						<td class="claimExtra"></td>
+						<td class="claimSubtotal"></td>
+					</tr>
+					<tr class="claimRow" id="row02">
+						<td class="claimOption"><a class="btn-floating btn waves-effect waves-light red" onclick="deleteRow(1,'row02')">&times;</a></td>
+						<td class="claimDescription" onclick="openModal(1)"></td>
+						<td class="claimExtra"></td>
+						<td class="claimSubtotal"></td>					
+					</tr>
+					<tr class="claimRow" id="row03">
+						<td class="claimOption"><a class="btn-floating btn waves-effect waves-light red" onclick="deleteRow(2,'row03')">&times;</a></td>
+						<td class="claimDescription" onclick="openModal(2)"></td>
+						<td class="claimExtra"></td>
+						<td class="claimSubtotal"></td>					
+					</tr>
+					<tr class="claimRow" id="row04">
+						<td class="claimOption"><a class="btn-floating btn waves-effect waves-light red" onclick="deleteRow(3,'row04')">&times;</a></td>
+						<td class="claimDescription" onclick="openModal(3)"></td>
+						<td class="claimExtra"></td>
+						<td class="claimSubtotal"></td>					
+					</tr>
+					<tr class="claimRow" id="row05">
+						<td class="claimOption"><a class="btn-floating btn waves-effect waves-light red" onclick="deleteRow(4,'row05')">&times;</a></td>
+						<td class="claimDescription" onclick="openModal(4)"></td>
+						<td class="claimExtra"></td>
+						<td class="claimSubtotal"></td>					
+					</tr>
+					<tr class="claimRow" id="row06">
+						<td class="claimOption"><a class="btn-floating btn waves-effect waves-light red" onclick="deleteRow(5,'row06')">&times;</a></td>
+						<td class="claimDescription" onclick="openModal(5)"></td>
+						<td class="claimExtra"></td>
+						<td class="claimSubtotal"></td>					
+					</tr>					
+					<tr>
+						<td class="claimOption"></td>
+						<td class="claimDescription"></td>
+						<td class="claimExtra"></td>
+						<td class="claimSubtotal" id="clmtotal"></td>					
+					</tr>
+				</table>
+			</div>
+			
+			
+
+			<!-- Section of finishing making claim -->
+			<div>
+				<a onClick="tehee()" class="waves-effect waves-light btn red"><i class="mdi mdi-file-pdf-box left"></i>Save as PDF</a>
+			</div>
+		</div>
+		
+
+		<!-- -->
+		<!-- Subsistence modal -->
+		<div id="subsModal" class="modal">
+		  <!-- Modal content -->
+		  <div class="modal-content">
+			<div class="modal-header">
+				<div class="row">
+					<div class="col s11">
+						<h2 class="modal-title">Subsistence</h2>
+					</div>
+					<div class="col s1">
+						<a class="btn-floating btn waves-effect waves-light red darken-1 close" onclick="closeModal()">&times;</a>
+					</div>
+				</div>
+			</div>
+			<div class="modal-body">
+				<!-- Rates & Days -->
+				<div class="input-field row">
+					<input id="clmsubs_rates" type="text" placeholder="40.00" spellcheck="false" onkeyup="mirror('clmsubs_text')"></input>
+					<label for="clmsubs_rates">Rates (RM)</label>
+				</div>
+				<div class="input-field row disabled">
+					<input id="clmsubs_days" type="text" placeholder="14" spellcheck="false"></input>
+					<label for="clmsubs_days">Days</label>
+				</div>
+				<div class="row">
+					<a id="savesubs" class="btn waves-effect waves-light modal-save" onclick="saveSubs()">Save</a>
+				</div>
+			</div>
+			<div class="modal-footer">
+			  <p id="clmsubs_text"></p>
+			</div>
+		  </div>
+		</div>
+		
+		<!-- Lodging modal -->
+		<div id="lodgingModal" class="modal">
+		  <!-- Modal content -->
+		  <div class="modal-content">
+			<div class="modal-header">
+				<div class="row">
+					<div class="col s11">
+						<h2 class="modal-title">Lodging</h2>
+					</div>
+					<div class="col s1">
+						<a class="btn-floating btn waves-effect waves-light red darken-1 close" onclick="closeModal()">&times;</a>
+					</div>
+				</div>
+			</div>
+			<div class="modal-body">
+				<!-- Rates & Days -->
+				<div class="input-field row">
+					<input id="clmlodg_rates" type="text" placeholder="25.00" spellcheck="false" onkeyup="mirror('clmlodg_text')"></input>
+					<label for="clmlodg_rates">Rates (RM)</label>
+				</div>
+				<div class="input-field row disabled">
+					<input id="clmlodg_days" type="text" placeholder="14" spellcheck="false"></input>
+					<label for="clmlodg_days">Days</label>
+				</div>
+				<div class="row">
+					<a id="savelodg" class="btn waves-effect waves-light modal-save" onclick="saveLodging()">Save</a>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<p id="clmlodg_text"></p>
+			</div>
+		  </div>
+		</div>
+
+		<!-- Fare modal -->
+		<div id="fareModal" class="modal">
+		  <!-- Modal content -->
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <!--<span class="close" onclick="closeModal()">&times;</span>-->
+				<div class="row">
+					<div class="col s11">
+						<h2 class="modal-title">Transportation Fare</h2>
+					</div>
+					<div class="col s1">
+						<a class="btn-floating btn waves-effect waves-light red darken-1 close" onclick="closeModal()">&times;</a>
+					</div>
+				</div>
+			</div>
+			<div class="modal-body">
+				<div class="col s12">
+					<div class="row">
+						<label for="clmfare_mode">Mode of transport</label>
+						<select id="clmfare_mode" class="browser-default" onchange="mirror('clmfare_text')">
+							<option value="Bus">Bus</option>
+							<option value="Express">Express</option>
+							<option value="Aeroplane">Aeroplane</option>
+						</select>
+					</div>
+					<div class="input-field row">
+						<input id="clmfare_price" type="text" placeholder="30.00" spellcheck="false" onkeyup="mirror('clmfare_text')"></input>
+						<label for="clmfare_price">Price (RM)</label>
+					</div>
+					<div class="input-field row">
+						<input id="clmfare_ticket" type="text" placeholder="Ticket No" spellcheck="false" onkeyup="mirror('clmfare_text')"></input>
+						<label for="clmfare_ticket">Ticket No</label>
+					</div>
+					<div class="input-field row">
+						<input id="clmfare_from" class="awesomplete" data-list="Kapit, Sibu, Selangau, Ng. Mapai Kanowit, Song, Taman Balleh, Ng. Gaat, Ng. Sempileh, Ng. Selawan, Ng. Nansang, Ng. Putai, Ulu Putai JTP" type="text" placeholder="Kapit" spellcheck="false" onkeyup="mirror('clmfare_text')"></input>
+						<label for="clmfare_from">From</label>
+					</div>
+					<div class="input-field row">
+						<input class="awesomplete" id="clmfare_desti" data-list="Kapit, Sibu, Selangau, Ng. Mapai Kanowit, Song, Taman Balleh, Ng. Gaat, Ng. Sempileh, Ng. Selawan, Ng. Nansang, Ng. Putai, Ulu Putai JTP" type="text" placeholder="Ng. Sempileh" spellcheck="false" onkeyup="mirror('clmfare_text')"></input>
+						<label for="clmfare_desti">Destination</label>
+					</div>						
+					<div class="row">
+						<a id="savefare" class="btn waves-effect waves-light modal-save" onclick="saveFare()">Save</a>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<p id="clmfare_text"></p>
+			</div>
+		  </div>
+		</div>
+		
+		<!-- Reload modal -->
+		<div id="reloadModal" class="modal">
+		  <!-- Modal content -->
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <!--<span class="close" onclick="closeModal()">&times;</span>-->
+				<div class="row">
+					<div class="col s11">
+						<h2 class="modal-title">Mobile Reload</h2>
+					</div>
+					<div class="col s1">
+						<a class="btn-floating btn waves-effect waves-light red darken-1 close" onclick="closeModal()">&times;</a>
+					</div>
+				</div>
+			</div>
+			<div class="modal-body">
+				<form class="col s12">
+
+						<div class="row">
+							<label for="clmreload_telco">Telco</label>
+							<select id="clmreload_telco" class="browser-default" onchange="mirror('clmreload_text')">
+								<option value="Celcom" >Celcom</option>
+								<option value="DiGi">DiGi</option>
+								<option value="Maxis">Maxis</option>
+							</select>
+						</div>
+						<div class="input-field row">
+							<input id="clmreload_no" type="text" placeholder="Phone No" spellcheck="false" onkeyup="mirror('clmreload_text')"></input>
+							<label for="clmreload_no">Telephone No</label>
+						</div>
+						<div class="input-field row">
+							<input id="clmreload_coupon" type="text" placeholder="Coupon No" spellcheck="false" onkeyup="mirror('clmreload_text')"></input>
+							<label for="clmreload_coupon">Coupon No</label>
+						</div>
+						<div class="input-field row">
+							<input id="clmreload_price" type="text" placeholder="10" onkeyup="mirror('clmreload_text')"></input>
+							<label for="clmreload_price">Price (RM)</label>
+						</div>
+						<div class="row">
+							<a id="savemobi" class="btn waves-effect waves-light modal-save" onclick="saveReload()">Save</a>
+						</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<p id="clmreload_text"></p>
+			</div>
+		  </div>
+		</div>
+
+		<!-- Others modal -->
+		<div id="otherModal" class="modal">
+		  <!-- Modal content -->
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <span class="close" onclick="closeModal()">&times;</span>
+			  <h2>Others</h2>
+			</div>
+			<div class="modal-body">
+			  <p>Some text in the Modal Body</p>
+			  <p>Some other text...</p>
+			</div>
+			<div class="modal-footer">
+			  <h3>Modal Footer</h3>
+			</div>
+		  </div>
+		</div>
+    </body>
+
+</html>
+
+<!-- Temporary script to conduct test -->
+<script>
+
+	// Code to set default value to Date
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+	var yyyy = today.getFullYear();
+
+	if(dd<10) {
+		dd='0'+dd
+	} 
+
+	if(mm<10) {
+		mm='0'+mm
+	} 
+
+	today = yyyy+'-'+mm+'-'+dd;
+	//document.getElementById("idclm_date").value = today;
+	
+	
+	
+	// Code to generate default WO Order No.
+	// Using information from Region and Current Year
+	var defclm_wo, clm_region;
+	
+	if (document.getElementById("idclm_region").value == "Kapit Sub-Region") {
+		clm_region = "KPT";
+	}
+	
+	defclm_wo = clm_region + "/" + yyyy + "/";
+	document.getElementById("idclm_wo").value = defclm_wo;
+	
+	// Code to set Depart and Return date
+	var departDate = moment().subtract(14,"days").calendar();
+	document.getElementById("idclm_depart").value = moment(departDate).format("YYYY-MM-DD");;
+	document.getElementById("idclm_return").value = today;
+	
+	// Code to set default value to Depart and Return time
+	document.getElementById("idclm_detime").value = "11:00";
+	document.getElementById("idclm_retime").value = "14:30"
+	
+	// To clear console from annoying unnecessary messages
+	console.clear();
+	console.log("Handle with great care. Any improper console command would damage this application structure.");
+</script>
+
+
+
+
