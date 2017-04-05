@@ -197,7 +197,7 @@ function newSubs() {
 	returnDate = moment(document.getElementById("idclm_return").value);
 	var difference = returnDate.diff(departDate, 'days');
 	
-	document.getElementById("subsModal").style.display = "block";
+	$('#subsModal').modal('open');
 	document.getElementById("clmsubs_rates").value = "40.00";
 	document.getElementById("clmsubs_days").value = difference;
 	document.getElementById("clmsubs_text").innerHTML = "";
@@ -511,6 +511,11 @@ function showAll() {
 // When the User clicks the button, open the modal
 function openModal(ci) {
 
+	$(document).ready(function(){
+		// the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+		$('.modal').modal();
+	});
+
 	currentIndex = ci;
 
 	// Determines the type of Modal Form to be opened
@@ -546,20 +551,6 @@ function openModal(ci) {
 	
 	// Quick fix to prevent the summoning of modal unintentionally
 	if (currentModal != "") {
-		modalForm.style.display = "block";
+		$('#'+currentModal).modal('open'); // open modals programatically
 	}
-}
-
-// When the User clicks on "X", close the modal
-function closeModal() {
-	modalForm = document.getElementById(currentModal);
-	modalForm.style.display = "none";
-}
-
-// When the User clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-	modalForm = document.getElementById(currentModal);
-    if (event.target == modalForm) {
-        modalForm.style.display = "none";
-    }
 }

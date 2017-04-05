@@ -11,7 +11,6 @@
 		<script src="js/moment.js"></script>
 		<script src="js/jquery-2.1.4.min.js"></script>
 		<script src="js/materialize.js"></script>
-		<script src="js/awesomplete.js" async></script>
 		<script src="js/jspdf.debug.js"></script>
 		<script src="js/program.js"></script>
 		<script src="js/print.js"></script>
@@ -186,19 +185,9 @@
 		<!-- -->
 		<!-- Subsistence modal -->
 		<div id="subsModal" class="modal">
-		  <!-- Modal content -->
-		  <div class="modal-content">
-			<div class="modal-header">
-				<div class="row">
-					<div class="col s11">
-						<h2 class="modal-title">Subsistence</h2>
-					</div>
-					<div class="col s1">
-						<a class="btn-floating btn waves-effect waves-light red darken-1 close" onclick="closeModal()">&times;</a>
-					</div>
-				</div>
-			</div>
-			<div class="modal-body">
+			<!-- Modal content -->
+			<div class="modal-content">
+				<h6>Subsistence</h6>
 				<!-- Rates & Days -->
 				<div class="input-field row">
 					<input id="clmsubs_rates" type="text" placeholder="40.00" spellcheck="false" onkeyup="mirror('clmsubs_text')"></input>
@@ -213,26 +202,15 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-			  <p id="clmsubs_text"></p>
-			</div>
-		  </div>
+				<p id="clmsubs_text"></p>
+			</div>		  
 		</div>
 		
 		<!-- Lodging modal -->
 		<div id="lodgingModal" class="modal">
-		  <!-- Modal content -->
-		  <div class="modal-content">
-			<div class="modal-header">
-				<div class="row">
-					<div class="col s11">
-						<h2 class="modal-title">Lodging</h2>
-					</div>
-					<div class="col s1">
-						<a class="btn-floating btn waves-effect waves-light red darken-1 close" onclick="closeModal()">&times;</a>
-					</div>
-				</div>
-			</div>
-			<div class="modal-body">
+			<!-- Modal content -->
+			<div class="modal-content">
+				<h5>Lodging</h5>
 				<!-- Rates & Days -->
 				<div class="input-field row">
 					<input id="clmlodg_rates" type="text" placeholder="25.00" spellcheck="false" onkeyup="mirror('clmlodg_text')"></input>
@@ -249,25 +227,13 @@
 			<div class="modal-footer">
 				<p id="clmlodg_text"></p>
 			</div>
-		  </div>
 		</div>
 
 		<!-- Fare modal -->
 		<div id="fareModal" class="modal">
-		  <!-- Modal content -->
-		  <div class="modal-content">
-			<div class="modal-header">
-			  <!--<span class="close" onclick="closeModal()">&times;</span>-->
-				<div class="row">
-					<div class="col s11">
-						<h2 class="modal-title">Transportation Fare</h2>
-					</div>
-					<div class="col s1">
-						<a class="btn-floating btn waves-effect waves-light red darken-1 close" onclick="closeModal()">&times;</a>
-					</div>
-				</div>
-			</div>
-			<div class="modal-body">
+			<!-- Modal content -->
+			<div class="modal-content">
+				<h5>Transportation Fare</h5>
 				<div class="col s12">
 					<div class="row">
 						<label for="clmfare_mode">Mode of transport</label>
@@ -286,11 +252,11 @@
 						<label for="clmfare_ticket">Ticket No</label>
 					</div>
 					<div class="input-field row">
-						<input id="clmfare_from" class="awesomplete" data-list="Kapit, Sibu, Selangau, Ng. Mapai Kanowit, Song, Taman Balleh, Ng. Gaat, Ng. Sempileh, Ng. Selawan, Ng. Nansang, Ng. Putai, Ulu Putai JTP" type="text" placeholder="Kapit" spellcheck="false" onkeyup="mirror('clmfare_text')"></input>
+						<input id="clmfare_from" type="text" placeholder="Kapit" spellcheck="false" onkeyup="mirror('clmfare_text')"></input>
 						<label for="clmfare_from">From</label>
 					</div>
 					<div class="input-field row">
-						<input class="awesomplete" id="clmfare_desti" data-list="Kapit, Sibu, Selangau, Ng. Mapai Kanowit, Song, Taman Balleh, Ng. Gaat, Ng. Sempileh, Ng. Selawan, Ng. Nansang, Ng. Putai, Ulu Putai JTP" type="text" placeholder="Ng. Sempileh" spellcheck="false" onkeyup="mirror('clmfare_text')"></input>
+						<input id="clmfare_desti" type="text" placeholder="Ng. Sempileh" spellcheck="false" onkeyup="mirror('clmfare_text')"></input>
 						<label for="clmfare_desti">Destination</label>
 					</div>						
 					<div class="row">
@@ -298,30 +264,17 @@
 					</div>
 				</div>
 			</div>
-			<div class="modal-footer">
+		  	<div class="modal-footer">
 				<p id="clmfare_text"></p>
 			</div>
-		  </div>
 		</div>
 		
 		<!-- Reload modal -->
 		<div id="reloadModal" class="modal">
-		  <!-- Modal content -->
-		  <div class="modal-content">
-			<div class="modal-header">
-			  <!--<span class="close" onclick="closeModal()">&times;</span>-->
-				<div class="row">
-					<div class="col s11">
-						<h2 class="modal-title">Mobile Reload</h2>
-					</div>
-					<div class="col s1">
-						<a class="btn-floating btn waves-effect waves-light red darken-1 close" onclick="closeModal()">&times;</a>
-					</div>
-				</div>
-			</div>
-			<div class="modal-body">
-				<form class="col s12">
-
+			<!-- Modal content -->
+			<div class="modal-content">
+				<h5>Mobile Reload</h5>
+				<form class="col">
 						<div class="row">
 							<label for="clmreload_telco">Telco</label>
 							<select id="clmreload_telco" class="browser-default" onchange="mirror('clmreload_text')">
@@ -350,7 +303,6 @@
 			<div class="modal-footer">
 				<p id="clmreload_text"></p>
 			</div>
-		  </div>
 		</div>
 
 		<!-- Others modal -->
