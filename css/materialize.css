@@ -2610,7 +2610,7 @@ a {
 .divider {
   height: 1px;
   overflow: hidden;
-  background-color: #d0d0d0;
+  background-color: #e0e0e0;
 }
 
 blockquote {
@@ -2918,7 +2918,7 @@ thead {
 }
 
 td, th {
-  padding: 5px 5px;
+  padding: 15px 5px;
   display: table-cell;
   text-align: left;
   vertical-align: middle;
@@ -3344,10 +3344,6 @@ nav ul a span.badge {
   margin: 0 auto;
   max-width: 1280px;
   width: 90%;
-  padding-top: 10px ;
-  padding-bottom: 30px ;
-  padding-right: 10px ;
-  padding-left: 10px ;
 }
 
 @media only screen and (min-width: 601px) {
@@ -3387,7 +3383,7 @@ nav ul a span.badge {
 .row {
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .row:after {
@@ -5113,9 +5109,9 @@ small {
   position: relative;
   overflow: hidden;
   z-index: 1;
-  width: 30px;
-  height: 30px;
-  line-height: 30px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
   padding: 0;
   background-color: #26a69a;
   border-radius: 50%;
@@ -5510,8 +5506,8 @@ button.btn-floating {
   right: 0;
   background-color: #fafafa;
   padding: 0;
-  max-height: 100%; /*70*/
-  width: 100%; /*55*/
+  max-height: 70%;
+  width: 55%;
   margin: auto;
   overflow-y: auto;
   border-radius: 2px;
@@ -5525,24 +5521,24 @@ button.btn-floating {
 }
 
 .modal h1, .modal h2, .modal h3, .modal h4 {
-  margin: 0;
+  margin-top: 0;
 }
 
 .modal .modal-content {
-  padding: 0px;
+  padding: 24px;
 }
 
 .modal .modal-close {
   cursor: pointer;
 }
-/*
+
 .modal .modal-footer {
   border-radius: 0 0 2px 2px;
   background-color: #fafafa;
   padding: 4px 6px;
   height: 56px;
   width: 100%;
-*/
+}
 
 .modal .modal-footer .btn, .modal .modal-footer .btn-large, .modal .modal-footer .btn-flat {
   float: right;
@@ -5827,7 +5823,7 @@ button:focus {
 
 label {
   font-size: 0.8rem;
-  color: black;/*#9e9e9e;*/
+  color: #9e9e9e;
 }
 
 /* Text Inputs + Textarea
@@ -5870,10 +5866,10 @@ textarea.materialize-textarea {
   border-bottom: 1px solid #9e9e9e;
   border-radius: 0;
   outline: none;
-  height: 2rem; /*3rem;*/
+  height: 2rem; /*3rem*/
   width: 100%;
   font-size: 1rem;
-  margin: 0 0 10px 0;
+  margin: 0 0 10px 0; /*0 0 20px 0*/
   padding: 0;
   box-shadow: none;
   box-sizing: content-box;
@@ -6155,7 +6151,7 @@ textarea.materialize-textarea + label:after {
 }
 
 .input-field label {
-  color: black;/*#9e9e9e;*/
+  color: #9e9e9e;
   position: absolute;
   top: 0.8rem;
   left: 0;
@@ -6711,10 +6707,10 @@ select.browser-default {
 select {
   background-color: rgba(255, 255, 255, 0.9);
   width: 100%;
-  padding: 0px;
-  border: 1px solid #9e9e9e;/*#f2f2f2;*/
+  padding: 5px;
+  border: 1px solid #f2f2f2;
   border-radius: 2px;
-  height: 2rem;
+  height: 3rem;
 }
 
 .select-label {
