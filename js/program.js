@@ -193,6 +193,7 @@ function getClaimCode(i) {
 // Function to create a claim
 // For Subsistence
 function newSubs() {
+	$(document).ready(function(){$('.modal').modal();});
 	departDate = moment(document.getElementById("idclm_depart").value);
 	returnDate = moment(document.getElementById("idclm_return").value);
 	var difference = returnDate.diff(departDate, 'days');
@@ -206,11 +207,12 @@ function newSubs() {
 }
 // For Lodging
 function newLodging() {
+	$(document).ready(function(){$('.modal').modal();});
 	departDate = moment(document.getElementById("idclm_depart").value);
 	returnDate = moment(document.getElementById("idclm_return").value);
 	var difference = returnDate.diff(departDate, 'days');
 	
-	document.getElementById("lodgingModal").style.display = "block";
+	$('#lodgingModal').modal('open');
 	document.getElementById("clmlodg_rates").value = "25.00";
 	document.getElementById("clmlodg_days").value = difference;
 	document.getElementById("clmlodg_text").innerHTML = "";
@@ -219,7 +221,8 @@ function newLodging() {
 }
 // For Fares
 function newFare() {
-	document.getElementById("fareModal").style.display = "block";
+	$(document).ready(function(){$('.modal').modal();});
+	$('#fareModal').modal('open');
 	document.getElementById("savefare").className += " disabled";
 	document.getElementById("clmfare_mode").value = "";
 	document.getElementById("clmfare_price").value = "30.00";
@@ -232,7 +235,8 @@ function newFare() {
 }
 // For Mobile Reload
 function newMobile() {
-	document.getElementById("reloadModal").style.display = "block";
+	$(document).ready(function(){$('.modal').modal();});
+	$('#reloadModal').modal('open')
 	document.getElementById("savemobi").className += " disabled";
 	document.getElementById("clmreload_telco").value = "";
 	document.getElementById("clmreload_no").value = "";
@@ -427,7 +431,8 @@ function saveSubs() {
 	var newInfo = "1#" + days + "#" + rates + "#" + subtotal;
 	
 	claimList[currentIndex] = newInfo;
-	closeModal();
+	$(document).ready(function(){$('.modal').modal();});
+	$('#subsModal').modal('close');
 	populate();
 }
 // For Modal Lodging
@@ -439,9 +444,10 @@ function saveLodging() {
 	subtotal = Number(days * rates).toFixed(2);
 	
 	var newInfo = "2#" + days + "#" + rates + "#" + subtotal;
-		
-	claimList[currentIndex] = newInfo;
-	closeModal();
+
+	claimList[currentIndex] = newInfo;	
+	$(document).ready(function(){$('.modal').modal();});
+	$('#lodgingModal').modal('close');
 	populate();	
 }
 // For Modal Fare
@@ -457,7 +463,8 @@ function saveFare() {
 	var newInfo = "3#" + mode + "#" + price + "#" + ticket + "#" + depart + "#" + desti;
 	
 	claimList[currentIndex] = newInfo;
-	closeModal();
+	$(document).ready(function(){$('.modal').modal();});
+	$('#fareModal').modal('close');
 	populate();
 }
 // For Modal Mobile Reload
@@ -472,7 +479,8 @@ function saveReload() {
 	var newInfo = "4#" + telco + "#" + phone + "#" + coupon + "#" + price;
 	
 	claimList[currentIndex] = newInfo;
-	closeModal();
+	$(document).ready(function(){$('.modal').modal();});
+	$('#reloadModal').modal('close');
 	populate();
 }
 // For Modal Other
@@ -481,30 +489,6 @@ function saveOther() {
 	closeModal();
 	populate();	
 }
-
-
-// Temporary: function to show summary of data
-function showAll() {
-	var allinfo;
-	
-	allinfo = '\n' + document.getElementById("idclm_name").value;
-	allinfo += '\n' + document.getElementById("idclm_region").value;
-	allinfo += '\n' + document.getElementById("idclm_department").value;
-	allinfo += '\n' + document.getElementById("idclm_date").value;
-	
-	alert(allinfo);
-	
-	var doc = new jsPDF();
-
-	doc.text(allinfo, 10, 10);
-	
-	doc.save('a4.pdf')
-}
-
-
-
-
-
 
 /* The Modals interactivity */
 

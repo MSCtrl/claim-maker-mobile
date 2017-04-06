@@ -87,3 +87,9 @@
 .modal {
 	padding: 16px;
 }
+.col-right {
+	text-align: right;
+}
+.row .col {
+	padding: 0px;
+}
