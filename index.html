@@ -190,7 +190,7 @@
 				<h5>Subsistence</h5>
 				<!-- Rates & Days -->
 				<div class="input-field row">
-					<input id="clmsubs_rates" type="text" placeholder="40.00" spellcheck="false" onkeyup="mirror('clmsubs_text')"></input>
+					<input id="clmsubs_rates" type="text" placeholder="40.00" spellcheck="false" onkeyup="textAllowance()"></input>
 					<label for="clmsubs_rates">Rates (RM)</label>
 				</div>
 				<div class="input-field row disabled">
@@ -201,9 +201,6 @@
 					<div class="col s6"><a id="savesubs" class="btn waves-effect waves-light" onclick="saveSubs()">Save</a></div>
 					<div class="col s6 col-right"><a class="btn-flat modal-close">Close</a></div>
 				</div>
-			</div>
-			<div class="modal-footer">
-				<p id="clmsubs_text"></p>
 			</div>		  
 		</div>
 		
@@ -214,7 +211,7 @@
 				<h5>Lodging</h5>
 				<!-- Rates & Days -->
 				<div class="input-field row">
-					<input id="clmlodg_rates" type="text" placeholder="25.00" spellcheck="false" onkeyup="mirror('clmlodg_text')"></input>
+					<input id="clmlodg_rates" type="text" placeholder="25.00" spellcheck="false" onkeyup="textAllowance"></input>
 					<label for="clmlodg_rates">Rates (RM)</label>
 				</div>
 				<div class="input-field row disabled">
@@ -226,9 +223,6 @@
 					<div class="col s6 col-right"><a class="btn-flat modal-close">Close</a></div>
 				</div>
 			</div>
-			<div class="modal-footer">
-				<p id="clmlodg_text"></p>
-			</div>
 		</div>
 
 		<!-- Fare modal -->
@@ -239,26 +233,26 @@
 				<div class="col s12">
 					<div class="row">
 						<label for="clmfare_mode">Mode of transport</label>
-						<select id="clmfare_mode" class="browser-default" onchange="mirror('clmfare_text')">
+						<select id="clmfare_mode" class="browser-default" onchange="textFare()">
 							<option value="Bus">Bus</option>
 							<option value="Express">Express</option>
 							<option value="Aeroplane">Aeroplane</option>
 						</select>
 					</div>
 					<div class="input-field row">
-						<input id="clmfare_price" type="text" placeholder="30.00" spellcheck="false" onkeyup="mirror('clmfare_text')"></input>
+						<input id="clmfare_price" type="text" placeholder="30.00" spellcheck="false" onkeyup="textFare()"></input>
 						<label for="clmfare_price">Price (RM)</label>
 					</div>
 					<div class="input-field row">
-						<input id="clmfare_ticket" type="text" placeholder="Ticket No" spellcheck="false" onkeyup="mirror('clmfare_text')"></input>
+						<input id="clmfare_ticket" type="text" placeholder="Ticket No" spellcheck="false" onkeyup="textFare()"></input>
 						<label for="clmfare_ticket">Ticket No</label>
 					</div>
 					<div class="input-field row">
-						<input id="clmfare_from" type="text" placeholder="Kapit" spellcheck="false" onkeyup="mirror('clmfare_text')"></input>
+						<input id="clmfare_from" type="text" placeholder="Kapit" spellcheck="false" onkeyup="textFare()"></input>
 						<label for="clmfare_from">From</label>
 					</div>
 					<div class="input-field row">
-						<input id="clmfare_desti" type="text" placeholder="Ng. Sempileh" spellcheck="false" onkeyup="mirror('clmfare_text')"></input>
+						<input id="clmfare_desti" type="text" placeholder="Ng. Sempileh" spellcheck="false" onkeyup="textFare()"></input>
 						<label for="clmfare_desti">Destination</label>
 					</div>						
 					<div class="row">
@@ -266,9 +260,6 @@
 						<div class="col s6 col-right"><a class="btn-flat modal-close">Close</a></div>
 					</div>
 				</div>
-			</div>
-		  	<div class="modal-footer">
-				<p id="clmfare_text"></p>
 			</div>
 		</div>
 		
@@ -280,22 +271,22 @@
 				<form class="col">
 						<div class="row">
 							<label for="clmreload_telco">Telco</label>
-							<select id="clmreload_telco" class="browser-default" onchange="mirror('clmreload_text')">
+							<select id="clmreload_telco" class="browser-default" onchange="textReload()">
 								<option value="Celcom" >Celcom</option>
 								<option value="DiGi">DiGi</option>
 								<option value="Maxis">Maxis</option>
 							</select>
 						</div>
 						<div class="input-field row">
-							<input id="clmreload_no" type="text" placeholder="Phone No" spellcheck="false" onkeyup="mirror('clmreload_text')"></input>
+							<input id="clmreload_no" type="text" placeholder="Phone No" spellcheck="false" onkeyup="textReload()"></input>
 							<label for="clmreload_no">Telephone No</label>
 						</div>
 						<div class="input-field row">
-							<input id="clmreload_coupon" type="text" placeholder="Coupon No" spellcheck="false" onkeyup="mirror('clmreload_text')"></input>
+							<input id="clmreload_coupon" type="text" placeholder="Coupon No" spellcheck="false" onkeyup="textReload()"></input>
 							<label for="clmreload_coupon">Coupon No</label>
 						</div>
 						<div class="input-field row">
-							<input id="clmreload_price" type="text" placeholder="10" onkeyup="mirror('clmreload_text')"></input>
+							<input id="clmreload_price" type="text" placeholder="10" onkeyup="textReload()"></input>
 							<label for="clmreload_price">Price (RM)</label>
 						</div>
 						<div class="row">
@@ -303,9 +294,6 @@
 							<div class="col s6 col-right"><a class="btn-flat modal-close">Close</a></div>
 						</div>
 				</form>
-			</div>
-			<div class="modal-footer">
-				<p id="clmreload_text"></p>
 			</div>
 		</div>
 

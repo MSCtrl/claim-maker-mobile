@@ -254,7 +254,7 @@ function popSubs(i) {
 	document.getElementById("clmsubs_rates").value = subsDetail[2];
 	document.getElementById("clmsubs_days").value = subsDetail[1];
 	document.getElementById("clmsubs_days").setAttribute("readonly", true);
-	document.getElementById("clmsubs_text").innerHTML = textAllowance();
+	textAllowance();
 }
 // For Modal Lodging
 function popLodging(i) {
@@ -262,7 +262,7 @@ function popLodging(i) {
 	document.getElementById("clmlodg_rates").value = subsDetail[2];
 	document.getElementById("clmlodg_days").value = subsDetail[1];
 	document.getElementById("clmlodg_days").setAttribute("readonly", true);
-	document.getElementById("clmlodg_text").innerHTML = textAllowance();	
+	textAllowance();
 }
 // For Modal Fares
 function popFare(i) {
@@ -272,7 +272,7 @@ function popFare(i) {
 	document.getElementById("clmfare_ticket").value = fareDetail[3];
 	document.getElementById("clmfare_from").value = fareDetail[4];
 	document.getElementById("clmfare_desti").value = fareDetail[5];
-	document.getElementById("clmfare_text").innerHTML = textFare();
+	textFare();
 }
 // For Modal Mobile Reload
 function popReload(i) {
@@ -282,7 +282,7 @@ function popReload(i) {
 	document.getElementById("clmreload_no").value = reloadDetail[2];
 	document.getElementById("clmreload_coupon").value = reloadDetail[3];
 	document.getElementById("clmreload_price").value = reloadDetail[4];
-	document.getElementById("clmreload_text").innerHTML = textReload();
+	textReload();
 }
 // For Modal Others
 function popOther(i) {
@@ -300,13 +300,11 @@ function textAllowance() {
 		idrates = "clmsubs_rates";
 		iddays = "clmsubs_days";
 		idsave = "savesubs";
-		text = "Subsistence ";
 	}
 	else if (currentModal=="lodgingModal") {
 		idrates = "clmlodg_rates";
 		iddays = "clmlodg_days";
 		idsave = "savelodg";
-		text = "Lodging ";
 	}
 	
 	var rates, days;
@@ -327,9 +325,6 @@ function textAllowance() {
 	if (ratesPattern.test(rates)==false) {
 		document.getElementById(idsave).className += " disabled";
 	}
-	
-	text += " Allowance @ RM" + rates + " per day";
-	return text;
 }
 
 
@@ -356,11 +351,7 @@ function textFare() {
 	var pricePattern = /[0-9]+.[0-9]{2,2}$/
 	if (pricePattern.test(price)==false) {
 		document.getElementById("savefare").className += " disabled";
-	}	
-	
-	var fareText = mode + " fare: " + depart + " - " + desti + " Ticket No: " + ticket;
-	
-	return fareText;
+	}
 }
 // For Modal Mobile Reload
 // This function includes input error detection
@@ -386,11 +377,6 @@ function textReload() {
 	if (numPattern.test(phone)==true) {
 		document.getElementById("savemobi").className += " disabled";
 	}
-	
-	var reloadText = telco + " reload coupon for MARCH 2017 Coupon No: " + coupon + " (" + phone + ")";
-	// based on format below
-	// Celcom reload coupon for MARCH 2017 Coupon No: GST803211169001 (019-8390727)
-	return reloadText;
 }
 // For Modal Other
 // This function includes input error detection
@@ -535,6 +521,6 @@ function openModal(ci) {
 	
 	// Quick fix to prevent the summoning of modal unintentionally
 	if (currentModal != "") {
-		$('#'+currentModal).modal('open'); // open modals programatically
+		$('#'+currentModal).modal('open'); // open modals programmatically
 	}
 }
