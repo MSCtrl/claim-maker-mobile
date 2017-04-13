@@ -3,9 +3,7 @@
 ** required values and process them to their own coordinate
 ** in a PDF file, either for direct printing or saving
 */
-function tehee() {
-	alert(DATE);
-}
+
 // Required values with default values
 var NAME = "MOHAMAD SHAHRIM BIN BUSSMAN";
 var REGION = "Kapit Sub-Region";
@@ -18,14 +16,26 @@ var DEPARTDATE, DEPARTTIME, RETURNDATE, RETURNTIME;
 
 
 function pehin() {
-	var doc = new jsPDF();
 
+	var doc = new jsPDF({
+		orientation: 'portrait',
+		unit: 'in',
+		format: [8.27, 11.69] // A4 in Inches W 8.267 H 11.692
+	})
+	
+	
 	doc.setFont('Arial');
 	doc.setFontSize(8);
 	doc.setFontType("bolditalic");
-	
-	doc.text(NAME, 10, 10);
-	doc.text(REGION, 10, 30);
+
+	doc.text(NAME, 5.51, 2.35); // diff: 24
+	doc.text(REGION, 5.51, 2.59);
+	doc.text(POSITION, 5.51, 2.83);
+	doc.text(DATE, 5.51, 3.07);
+	doc.text("REFER TO WO:" + WO, 2, 4.56);
+	doc.setLineWidth(0.01);
+	doc.line(1,2,3,4);
+
 	
 	doc.save('allright_.pdf');
 	
