@@ -44,9 +44,53 @@ function selectionSort() {
 
 
 // FUNCTION CODES
+function initialize() {
+	
+	// Code to set default value to Date
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+	var yyyy = today.getFullYear();
+
+	if(dd<10) {
+		dd='0'+dd;
+	} 
+
+	if(mm<10) {
+		mm='0'+mm;
+	} 
+
+	today = yyyy+'-'+mm+'-'+dd;
+	//document.getElementById("idclm_date").value = today;
+
+	// Code to generate default WO Order No.
+	// Using information from Region and Current Year
+	var defclm_wo, clm_region;
+	
+	if (document.getElementById("idclm_region").value == "Kapit Sub-Region") {
+		clm_region = "KPT";
+	}
+	
+	defclm_wo = clm_region + "/" + yyyy + "/";
+	document.getElementById("idclm_wo").value = defclm_wo;
+	
+	// Code to set Depart and Return date
+	var departDate = moment().subtract(14,"days").calendar();
+	document.getElementById("idclm_depart").value = moment(departDate).format("YYYY-MM-DD");;
+	document.getElementById("idclm_return").value = today;
+	
+	// Code to set default value to Depart and Return time
+	document.getElementById("idclm_detime").value = "11:00";
+	document.getElementById("idclm_retime").value = "14:30"
+	
+	// To clear console from annoying unnecessary messages
+	console.clear();
+	console.log("Handle with great care. Any improper console command would damage this application structure.");	
+}
 
 // Populate the form with default values
 function populate(){
+	
 	selectionSort();
 	var text, subtotal;
 	var gtotal = 0.00;
