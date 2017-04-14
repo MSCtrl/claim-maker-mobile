@@ -201,7 +201,6 @@ function newSubs() {
 	$('#subsModal').modal('open');
 	document.getElementById("clmsubs_rates").value = "40.00";
 	document.getElementById("clmsubs_days").value = difference;
-	document.getElementById("clmsubs_text").innerHTML = "";
 	currentIndex = 5;
 	currentModal = "subsModal";
 }
@@ -215,7 +214,6 @@ function newLodging() {
 	$('#lodgingModal').modal('open');
 	document.getElementById("clmlodg_rates").value = "25.00";
 	document.getElementById("clmlodg_days").value = difference;
-	document.getElementById("clmlodg_text").innerHTML = "";
 	currentIndex = 5;
 	currentModal = "lodgingModal";
 }
@@ -229,7 +227,6 @@ function newFare() {
 	document.getElementById("clmfare_ticket").value = "";
 	document.getElementById("clmfare_from").value = "";
 	document.getElementById("clmfare_desti").value = "";
-	document.getElementById("clmfare_text").innerHTML = "";
 	currentIndex = 5;
 	currentModal = "fareModal";	
 }
@@ -242,7 +239,6 @@ function newMobile() {
 	document.getElementById("clmreload_no").value = "";
 	document.getElementById("clmreload_coupon").value = "";
 	document.getElementById("clmreload_price").value = "10.00";
-	document.getElementById("clmreload_text").innerHTML = "";
 	currentIndex = 5;
 	currentModal = "reloadModal";
 }
