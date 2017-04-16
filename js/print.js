@@ -5,17 +5,33 @@
 */
 
 // Required values with default values
-var NAME = "MOHAMAD SHAHRIM BIN BUSSMAN";
+var NAME = "Mohamad Shahrim Bin Bussman";
 var REGION = "Kapit Sub-Region";
-var POSITION = "Junior Log Inspector"
+var DESIGNATION = "Junior Log Inspector";
 var DATE = moment().format("DD.MM.YYYY");
 var CLAIM = new Array(false, true, false); // Respective order: 'Entertainment', 'Travelling', 'Miscellaneous'
-var WO = "KPT/2017";
+var WO = "KPT/2017/";
 var DEPARTMENT = "Endorsement & Shipping";
 
 
+// Function to replace default value into the default print variables
+function replaceValue() {
+	NAME = document.getElementById("idclm_name").value;
+	REGION = document.getElementById("idclm_region").value;
+	DESIGNATION = document.getElementById("idclm_designation").value;
+	DATE = moment().format("DD.MM.YYYY");
+	CLAIM[0] = document.getElementById("cbox-entm").checked;//new Array(false, true, false); // Respective order: 'Entertainment', 'Travelling', 'Miscellaneous'
+	CLAIM[1] = document.getElementById("cbox-trav").checked;
+	CLAIM[2] = document.getElementById("cbox-misc").checked;
+	WO = document.getElementById("idclm_wo").value;
+	DEPARTMENT = document.getElementById("idclm_department").value;	
+}
+
+body.onload = replaceValue();
+
 function pehin() {
 
+	replaceValue();
 	var doc = new jsPDF({
 		orientation: 'portrait',
 		unit: 'in',
@@ -27,9 +43,9 @@ function pehin() {
 	doc.setFontSize(9);
 	doc.setFontType("bolditalic");
 
-	doc.text(NAME, 5.51, 2.35); // diff: 24
+	doc.text(NAME.toUpperCase(), 5.51, 2.35); // diff: 24
 	doc.text(REGION, 5.51, 2.59);
-	doc.text(POSITION, 5.51, 2.83);
+	doc.text(DESIGNATION, 5.51, 2.83);
 	doc.text(DATE, 5.51, 3.07);
 	doc.text("REFER TO WO:" + WO, 2, 4.56);
 	
@@ -49,9 +65,9 @@ function pehin() {
 	}
 	
 	
-	doc.text(DEPARTMENT, 2.40, 5.80);
+	doc.text(DEPARTMENT.toUpperCase(), 2.40, 5.80);
 	// get String length so we can determine how long the underline would be
-	var textLength = DEPARTMENT.length / 15;
+	var textLength = DEPARTMENT.length / 12.5;
 	doc.setLineWidth(0.01);
 	doc.line(2.40,5.83,(2.40+textLength),5.83); // Very tricky
 	
@@ -98,6 +114,7 @@ function pehin() {
 		height += 0.40;
 	}
 	
+	doc.text("GRAND TOTAL :",4.52,9.38);
 	
 	doc.save('allright_.pdf');
 	
